@@ -20,14 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Button"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        />
+
+
 
 </LinearLayout>
