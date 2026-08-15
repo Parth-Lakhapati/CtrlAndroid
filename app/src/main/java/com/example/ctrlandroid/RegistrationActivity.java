@@ -45,7 +45,7 @@ public class RegistrationActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etRegistrationPassword);
         cbShowPassword = findViewById(R.id.cbRegistrationShowPassword);
         btnRegistration = findViewById(R.id.btnRegistration);
-        acbtnGoogle = findViewById(R.id.btnGoogleRegistration);
+        acbtnGoogle = findViewById(R.id.acbtnLoginGoogle);
 
         cbShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -98,20 +98,6 @@ public class RegistrationActivity extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        if(double_tap){
-            finishAffinity();
-        }else{
-            Toast.makeText(RegistrationActivity.this,"Exit",Toast.LENGTH_SHORT).show();
-            double_tap =true;
-            Handler h=new Handler();
-            h.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    double_tap =false;
-                }
-            },2000);
-        }
-    }
+
+
 }
