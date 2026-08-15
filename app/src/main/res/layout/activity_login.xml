@@ -6,8 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FAFAF5"
     android:fillViewport="true"
-    android:background="@drawable/gradient_background1"
+
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -24,7 +25,7 @@
             android:text="Welcome Back!!"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="#3E8E32"
             android:layout_gravity="start"
             android:fontFamily="@font/poppins_extrabold"
             android:layout_marginTop="80dp" />
@@ -137,7 +138,7 @@
             android:layout_height="55dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:backgroundTint="#0F766E"
+            android:backgroundTint="#3E8E32"
             android:elevation="8dp"
             android:text="Login"
             android:textColor="#FFFFFF"
@@ -194,6 +195,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="160dp"
             android:background="@drawable/google"
             android:drawablePadding="12dp"
             android:gravity="center"

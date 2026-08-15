@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@drawable/gradient_background1"
+    android:background="#FAFAF5"
     tools:context=".RegistrationActivity">
 
     <LinearLayout
@@ -17,17 +17,34 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!-- Heading -->
-        <TextView
-            android:layout_width="wrap_content"
+
+        <!-- Create Account Heading with Image -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginTop="45dp"
-            android:fontFamily="@font/poppins_extrabold"
-            android:text="Create Account"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="35dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_extrabold"
+                android:text="Create Account"
+                android:textColor="#3E8E32"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivRegistrationImage"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@drawable/heart"
+                android:scaleType="centerInside"
+                android:contentDescription="Registration illustration" />
+
+        </LinearLayout>
 
         <!-- Subtitle -->
         <TextView
@@ -73,7 +90,68 @@
 
             </androidx.cardview.widget.CardView>
 
+            <!-- Age -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp">
 
+                <EditText
+                    android:id="@+id/etRegistrationAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:hint="Enter Age"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="16dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Gender -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="Gender"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/rgRegistrationGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbRegistrationMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#0F766E"
+                    android:text="Male"
+                    android:textColor="@color/black" />
+
+                <RadioButton
+                    android:id="@+id/rbRegistrationFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:buttonTint="#0F766E"
+                    android:text="Female"
+                    android:textColor="@color/black" />
+
+
+            </RadioGroup>
             <!-- Mobile Number -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -141,7 +219,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
-                    android:hint="Create Username"
+                    android:hint="Enter Username"
                     android:inputType="text"
                     android:paddingStart="20dp"
                     android:paddingEnd="16dp"
@@ -167,7 +245,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
-                    android:hint="Create Password"
+                    android:hint="Enter Password"
                     android:inputType="textPassword"
                     android:paddingStart="20dp"
                     android:paddingEnd="16dp"
@@ -179,7 +257,6 @@
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
-
 
         <!-- Show Password -->
         <CheckBox
@@ -199,7 +276,7 @@
             android:layout_height="55dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:backgroundTint="#0F766E"
+            android:backgroundTint="#3E8E32"
             android:elevation="8dp"
             android:text="Create Account"
             android:textColor="#FFFFFF"
@@ -238,17 +315,17 @@
 
         </LinearLayout>
 
-
-        <!-- Google Button -->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnGoogleRegistration"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/google"
-            android:gravity="center"
-            android:text="" />
+            android:layout_width="25dp"
+            android:layout_height="20dp"
+            android:id="@+id/acbtnLoginGoogle"
+            android:text="Sign in with Google"
+            android:layout_marginLeft="160dp"
+            android:textColor="@color/neutral"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/google"
+
+            android:layout_margin="16dp"/>
 
     </LinearLayout>
 
