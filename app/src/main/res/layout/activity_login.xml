@@ -75,7 +75,6 @@
             </androidx.cardview.widget.CardView>
 
 
-            <!-- Password -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -132,7 +131,6 @@
         </RelativeLayout>
 
 
-        <!-- Login Button -->
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="300dp"
@@ -190,7 +188,6 @@
         </LinearLayout>
 
 
-        <!-- Button With Image -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/acbtnGoogleLogin"
             android:layout_width="40dp"
