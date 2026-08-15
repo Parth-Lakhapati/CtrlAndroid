@@ -19,10 +19,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // image slider sathi
         maven { url = uri("https://jitpack.io") }
     }
 }
-
 rootProject.name = "CtrlAndroid"
 include(":app")
  

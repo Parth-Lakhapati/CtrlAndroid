@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,10 +46,14 @@ import cz.msebera.android.httpclient.Header;
 public class RegistrationActivity extends AppCompatActivity {
 
     boolean double_tap=false;
-    EditText etName,etMobileNo,etEmail,etUsername,etPassword;
+    EditText etName,etMobileNo,etEmail,etUsername,etPassword,etAge;
     CheckBox cbShowPassword;
     Button btnRegistration;
     AppCompatButton acbtnGoogle;
+
+    RadioGroup rgGender;
+    int selectedId = rgGender.getCheckedRadioButtonId();
+    RadioButton rbGender = findViewById(selectedId);
     ProgressDialog progressDialog;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -62,8 +68,10 @@ public class RegistrationActivity extends AppCompatActivity {
         etName = findViewById(R.id.etRegistrationName);
         etMobileNo = findViewById(R.id.etRegistrationMobile);
         etEmail = findViewById(R.id.etRegistrationEmail);
+        rgGender = findViewById(R.id.rgRegistrationGender);
         etUsername = findViewById(R.id.etRegistrationUsername);
         etPassword = findViewById(R.id.etRegistrationPassword);
+        etAge = findViewById(R.id.etRegistrationAge);
         cbShowPassword = findViewById(R.id.cbRegistrationShowPassword);
         btnRegistration = findViewById(R.id.btnRegistration);
         acbtnGoogle = findViewById(R.id.acbtnGoogleRegistration);
@@ -103,12 +111,6 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        acbtnGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         acbtnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +134,8 @@ public class RegistrationActivity extends AppCompatActivity {
         params.put("email",etEmail.getText().toString().trim());
         params.put("user_name",etUsername.getText().toString().trim());
         params.put("password",etPassword.getText().toString().trim());
+        params.put("gender",rbGender);
+        params.put("age",etAge);
 
         android.util.Log.d("API_URL", Urls.registerUserAPI);
 
@@ -195,7 +199,7 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == 1234){
+        if(requestCode == 1234){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 task.getResult(ApiException.class);
