@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
                 android:background="@drawable/shape_background1"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:iconifiedByDefault="false"
                 android:queryHint="Search For Health,Campus,Hospital..."
 

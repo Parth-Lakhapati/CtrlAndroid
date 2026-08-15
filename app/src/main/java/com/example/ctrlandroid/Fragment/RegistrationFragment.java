@@ -39,7 +39,7 @@ public class RegistrationFragment extends Fragment {
         });
 
 
-        // Register gallery picker
+
         resultRegister();
 
         btnPickImage.setOnClickListener(v -> {
