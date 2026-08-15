@@ -39,13 +39,16 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        btmMenuHomeFrame=findViewById(R.id.BottomMenuHomeFrame);
-        btmMenuHome=findViewById(R.id.HomeBottomMenuHome);
+        preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+
+        btmMenuHomeFrame = findViewById(R.id.BottomMenuHomeFrame);
+        btmMenuHome = findViewById(R.id.HomeBottomMenuHome);
         btmMenuHome.setOnNavigationItemSelectedListener(this);
         btmMenuHome.setSelectedItemId(R.id.BottomMenuHomeFrame);
 
-        boolean isFirstTime=preferences.getBoolean("isFirstTime",true);
-        if(isFirstTime){
+        boolean isFirstTime = preferences.getBoolean("isFirstTime", true);
+
+        if (isFirstTime) {
             welcome();
         }
     }
@@ -83,7 +86,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         } else if (menuItem.getItemId()==R.id.itemHomeBottomProfile) {
             getSupportFragmentManager().beginTransaction().replace(R.id.BottomMenuHomeFrame,profileFragment).commit();
         }
-
         return true;
     }
 }

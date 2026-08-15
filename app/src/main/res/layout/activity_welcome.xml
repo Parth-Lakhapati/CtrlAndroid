@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomeActivity">
+
+    <FrameLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivGetStartedImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bghos"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/tvSplashTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HealthConnect"
+            android:layout_marginTop="120dp"
+            android:layout_gravity="top|center_horizontal"
+            android:fontFamily="@font/abhaya_libre_medium"
+            android:letterSpacing="0.05"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvHeadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginBottom="120dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Find health camps near you
+and register for the care you need.."
+            android:textColor="@android:color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/inter_semibold"
+            android:lineSpacingExtra="4dp" />
+
+        <Button
+            android:id="@+id/btnWelcome"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Get Started"
+            android:layout_gravity="center_horizontal|bottom"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="50dp"
+            android:textSize="18sp"
+            android:padding="14dp"
+            android:textStyle="bold"
+            android:backgroundTint="#3E8E32"
+            android:fontFamily="@font/poppins_extrabold"/>
+
+    </FrameLayout>
+
+</LinearLayout>
