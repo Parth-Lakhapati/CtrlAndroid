@@ -128,11 +128,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    etPassword.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.plus_icon,0);
+                    etPassword.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.eyecolor_img,0);
 
                 }else{
                     etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    etPassword.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.eye_closed,0);
+                    etPassword.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.eye_close_icon,0);
                 }
             }
         });
