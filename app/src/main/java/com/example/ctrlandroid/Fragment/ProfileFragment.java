@@ -3,7 +3,9 @@ package com.example.ctrlandroid.Fragment;
 import static android.app.Activity.RESULT_OK;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -19,11 +21,13 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.ctrlandroid.LoginActivity;
 import com.example.ctrlandroid.R;
 import com.example.ctrlandroid.URLS.Urls;
 import com.loopj.android.http.AsyncHttpClient;
@@ -44,6 +48,7 @@ public class ProfileFragment extends Fragment {
 
     EditText etName,etMobileNo,etEmail,etUsername,etAge;
     RadioGroup rgGender;
+    Button btnLogout;
     int IMAGE_REQUIRED=1;
     ProgressDialog progressDialog;
     SharedPreferences preferences;
@@ -59,7 +64,10 @@ public class ProfileFragment extends Fragment {
         etEmail = view.findViewById(R.id.etProfileEmail);
         etUsername = view.findViewById(R.id.etProfileUsername);
         etAge = view.findViewById(R.id.etProfileAge);
+
         rgGender = view.findViewById(R.id.rgGender);
+
+        btnLogout = view.findViewById(R.id.btnLogout);
 
         int selectedId = rgGender.getCheckedRadioButtonId();
 
@@ -87,6 +95,31 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog =new AlertDialog.Builder(getActivity());
+                alertDialog.setTitle("Logout the Account");
+                alertDialog.setMessage("Do you really want to Logout your account");
+                alertDialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                alertDialog.setNegativeButton("Logout", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        editor.putBoolean("isLogin", false);
+                        editor.apply();
+
+                        Intent i = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(i);
+                    }
+                }).show().create();
+
+            }
+        });
 
         return view;
     }
