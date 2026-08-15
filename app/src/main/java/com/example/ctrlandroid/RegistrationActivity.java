@@ -52,8 +52,6 @@ public class RegistrationActivity extends AppCompatActivity {
     AppCompatButton acbtnGoogle;
 
     RadioGroup rgGender;
-    int selectedId = rgGender.getCheckedRadioButtonId();
-    RadioButton rbGender = findViewById(selectedId);
     ProgressDialog progressDialog;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -76,6 +74,24 @@ public class RegistrationActivity extends AppCompatActivity {
         btnRegistration = findViewById(R.id.btnRegistration);
         acbtnGoogle = findViewById(R.id.acbtnGoogleRegistration);
 
+        int selectedId = rgGender.getCheckedRadioButtonId();
+
+        if (selectedId != -1) {
+            RadioButton rbGender = findViewById(selectedId);
+            String gender = rbGender.getText().toString();
+
+            Toast.makeText(
+                    RegistrationActivity.this,
+                    gender,
+                    Toast.LENGTH_SHORT
+            ).show();
+        } else {
+            Toast.makeText(
+                    RegistrationActivity.this,
+                    "Please select gender",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
         cbShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
@@ -134,7 +150,7 @@ public class RegistrationActivity extends AppCompatActivity {
         params.put("email",etEmail.getText().toString().trim());
         params.put("user_name",etUsername.getText().toString().trim());
         params.put("password",etPassword.getText().toString().trim());
-        params.put("gender",rbGender);
+        params.put("gender",rgGender);
         params.put("age",etAge);
 
         android.util.Log.d("API_URL", Urls.registerUserAPI);
