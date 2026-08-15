@@ -182,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
 
-                                        Intent i=new Intent(LoginActivity.this, HomeActivity.class);
+                                        Intent i=new Intent(LoginActivity.this, WelcomeActivity.class);
                                         startActivity(i);
                                         finish();
                                     }
@@ -226,19 +226,26 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == 1234){
+
+        if (requestCode == 1234) {   // <-- check requestCode, not resultCode
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            editor.putString("name","");
-            editor.putString("email","");
-            editor.apply();
             try {
-                task.getResult(ApiException.class);
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+
+                // Save user info
+                editor.putString("name", account.getDisplayName());
+                editor.putString("email", account.getEmail());
+                editor.apply();
+
+                Toast.makeText(LoginActivity.this, "Welcome " + account.getDisplayName(), Toast.LENGTH_SHORT).show();
+
                 navigateToHomeActivity();
             } catch (ApiException e) {
-                Toast.makeText(LoginActivity.this, ""+e, Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Google Sign-In failed: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();
             }
         }
     }
+
 
     private void navigateToHomeActivity() {
         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
