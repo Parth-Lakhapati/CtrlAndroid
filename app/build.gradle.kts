@@ -46,6 +46,7 @@ dependencies {
 
     implementation("com.airbnb.android:lottie-compose:6.6.7")
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation("com.loopj.android:android-async-http:1.4.11")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")

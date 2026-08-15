@@ -66,13 +66,7 @@ public class RegistrationActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etRegistrationPassword);
         cbShowPassword = findViewById(R.id.cbRegistrationShowPassword);
         btnRegistration = findViewById(R.id.btnRegistration);
-        acbtnGoogle = findViewById(R.id.acbtnGoogleRegistration);
-
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = preferences.edit();
-
-        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        googleSignInClient = GoogleSignIn.getClient(this,googleSignInOptions);
+        acbtnGoogle = findViewById(R.id.btnGoogleRegistration);
 
         cbShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
