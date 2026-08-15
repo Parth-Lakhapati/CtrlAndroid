@@ -26,7 +26,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.ctrlandroid.URLS.Urls;
+import com.example.ctrlandroid.comman.Urls;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -142,7 +142,6 @@ public class LoginActivity extends AppCompatActivity {
               signIn();
             }
         });
-
     }
 
     private void signIn() {
@@ -150,60 +149,56 @@ public class LoginActivity extends AppCompatActivity {
         startActivityForResult(signInIntent,1234);
     }
 
-    private void loginUser() {
+    private void loginUser()
+    {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
 
-        params.put("user_name",etUsername.getText().toString());
+        params.put("username",etUsername.getText().toString());
         params.put("password",etPassword.getText().toString());
 
         client.post(Urls.loginUserAPI,params,new JsonHttpResponseHandler()
-                {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        super.onSuccess(statusCode, headers, response);
+        {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
 
+                try {
+                    if(progressDialog != null && progressDialog.isShowing()) {
                         progressDialog.dismiss();
-
-                        try {
-                            String status = response.getString("success");
-                            String msg = response.getString("message");
-
-                            if(status.equals("1")){
-                                editor.putBoolean("isLogin",true);
-                                editor.apply();
-
-                                Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
-
-                                Handler h=new Handler();
-                                h.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-
-                                        Intent i=new Intent(LoginActivity.this, HomeActivity.class);
-                                        startActivity(i);
-                                        finish();
-                                    }
-                                },1000);
-                            }else{
-                                Toast.makeText(LoginActivity.this, " "+msg, Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-
                     }
+                    String status = response.getString("success");
+                    String message = response.getString("message");
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                        super.onFailure(statusCode, headers, throwable, errorResponse);
-                        progressDialog.dismiss();
-                        Toast.makeText(LoginActivity.this, "Server Error ", Toast.LENGTH_SHORT).show();
+                    if (status.equals("1")) {
+                        editor.putBoolean("isLogin",true);
+                        editor.putString("username",
+                                etUsername.getText().toString().trim());
+                        editor.apply();
 
+                        Toast.makeText(LoginActivity.this, "Login Successfully Done", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, ""+ message, Toast.LENGTH_SHORT).show();
                     }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
-        );
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+
+                if(progressDialog != null && progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+                Toast.makeText(LoginActivity.this,"Server Error",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
     @Override
     public void onBackPressed() {
         if(double_tap){
