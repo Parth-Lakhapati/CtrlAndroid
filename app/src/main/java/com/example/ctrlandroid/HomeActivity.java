@@ -44,23 +44,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         btmMenuHome.setOnNavigationItemSelectedListener(this);
         btmMenuHome.setSelectedItemId(R.id.BottomMenuHomeFrame);
 
-        boolean isFirstTime=preferences.getBoolean("isFirstTime",true);
-        if(isFirstTime){
-            welcome();
-        }
-    }
-
-    private void welcome() {
-        AlertDialog.Builder ad=new AlertDialog.Builder(HomeActivity.this);
-        ad.setTitle("WELCOME....");
-        ad.setMessage("Thank you for login in our app DSY College Finder");
-        ad.setPositiveButton("Thank you..", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        }).show().create();
-        editor.putBoolean("isFirstTime",false).commit();
     }
 
     HomeFragment homeFragment = new HomeFragment();
