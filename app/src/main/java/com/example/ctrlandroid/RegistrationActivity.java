@@ -45,7 +45,7 @@ public class RegistrationActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etRegistrationPassword);
         cbShowPassword = findViewById(R.id.cbRegistrationShowPassword);
         btnRegistration = findViewById(R.id.btnRegistration);
-        acbtnGoogle = findViewById(R.id.acbtnLoginGoogle);
+        acbtnGoogle = findViewById(R.id.btnGoogleRegistration);
 
         cbShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

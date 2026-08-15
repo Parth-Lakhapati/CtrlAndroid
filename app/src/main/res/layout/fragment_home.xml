@@ -16,11 +16,80 @@
         >
 
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
+
+            <!-- ================= HOME TOOLBAR ================= -->
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="10dp">
+
+                    <!-- HealthConnect Logo -->
+                    <ImageView
+                        android:id="@+id/ivHomeLogo"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:contentDescription="HealthConnect Logo"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <!-- App Name -->
+                    <TextView
+                        android:id="@+id/tvHomeTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_extrabold"
+                        android:text="HealthConnect"
+                        android:textColor="#3E8E32"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Notification -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardNotification"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        app:cardBackgroundColor="#F5FAF3"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="2dp">
+
+                        <ImageView
+                            android:id="@+id/ivNotification"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="Notifications"
+                            android:padding="10dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/notification_icon" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- ================= YOUR EXISTING 700+ LINES ================= -->
 
             <SearchView
                 android:id="@+id/svSearchFragment"
