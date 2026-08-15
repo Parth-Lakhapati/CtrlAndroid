@@ -151,58 +151,58 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser() {
-        AsyncHttpClient client = new AsyncHttpClient();
-        RequestParams params = new RequestParams();
-
-        params.put("user_name",etUsername.getText().toString());
-        params.put("password",etPassword.getText().toString());
-
-        client.post(Urls.loginUserAPI,params,new JsonHttpResponseHandler()
-                {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        super.onSuccess(statusCode, headers, response);
-
-                        progressDialog.dismiss();
-
-                        try {
-                            String status = response.getString("success");
-                            String msg = response.getString("message");
-
-                            if(status.equals("1")){
-                                editor.putBoolean("isLogin",true);
-                                editor.apply();
-
-                                Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
-
-                                Handler h=new Handler();
-                                h.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-
-                                        Intent i=new Intent(LoginActivity.this, HomeActivity.class);
-                                        startActivity(i);
-                                        finish();
-                                    }
-                                },1000);
-                            }else{
-                                Toast.makeText(LoginActivity.this, " "+msg, Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                        super.onFailure(statusCode, headers, throwable, errorResponse);
-                        progressDialog.dismiss();
-                        Toast.makeText(LoginActivity.this, "Server Error ", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-        );
+//        AsyncHttpClient client = new AsyncHttpClient();
+//        RequestParams params = new RequestParams();
+//
+//        params.put("user_name",etUsername.getText().toString());
+//        params.put("password",etPassword.getText().toString());
+//
+//        client.post(Urls.loginUserAPI,params,new JsonHttpResponseHandler()
+//                {
+//                    @Override
+//                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                        super.onSuccess(statusCode, headers, response);
+//
+//                        progressDialog.dismiss();
+//
+//                        try {
+//                            String status = response.getString("success");
+//                            String msg = response.getString("message");
+//
+//                            if(status.equals("1")){
+//                                editor.putBoolean("isLogin",true);
+//                                editor.apply();
+//
+//                                Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+//
+//                                Handler h=new Handler();
+//                                h.postDelayed(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//
+//                                        Intent i=new Intent(LoginActivity.this, HomeActivity.class);
+//                                        startActivity(i);
+//                                        finish();
+//                                    }
+//                                },1000);
+//                            }else{
+//                                Toast.makeText(LoginActivity.this, " "+msg, Toast.LENGTH_SHORT).show();
+//                            }
+//                        } catch (JSONException e) {
+//                            throw new RuntimeException(e);
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+//                        super.onFailure(statusCode, headers, throwable, errorResponse);
+//                        progressDialog.dismiss();
+//                        Toast.makeText(LoginActivity.this, "Server Error ", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                }
+//        );
     }
     @Override
     public void onBackPressed() {
