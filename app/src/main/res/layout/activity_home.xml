@@ -7,8 +7,22 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF0000"
-    tools:context=".HomeActivity">
+    android:background="@drawable/gradient_background1"
+    tools:context=".HomeActivity"
+    android:layout_weight="100">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="90"
+        android:id="@+id/BottomMenuHomeFrame"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:id="@+id/HomeBottomMenuHome"
+        app:menu="@menu/home_bottom_menu"/>
 
 
 </LinearLayout>
