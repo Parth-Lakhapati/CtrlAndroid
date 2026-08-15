@@ -32,7 +32,8 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_extrabold"
                 android:text="Create Account"
-                android:textColor="#3E8E32"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/gradient_background1"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -318,7 +319,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="25dp"
             android:layout_height="20dp"
-            android:id="@+id/acbtnLoginGoogle"
+            android:id="@+id/btnGoogleRegistration"
             android:text="Sign in with Google"
             android:layout_marginLeft="160dp"
             android:textColor="@color/neutral"
