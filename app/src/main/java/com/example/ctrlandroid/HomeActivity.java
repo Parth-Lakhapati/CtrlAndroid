@@ -63,6 +63,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     HomeFragment homeFragment = new HomeFragment();
     SearchFragment searchFragment = new SearchFragment();
+    NewFragment newFragment = new NewFragment();
     RegistrationFragment registrationFragment = new RegistrationFragment();
     ProfileFragment profileFragment = new ProfileFragment();
 
@@ -73,6 +74,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             getSupportFragmentManager().beginTransaction().replace(R.id.BottomMenuHomeFrame,homeFragment).commit();
         }else if(menuItem.getItemId()==R.id.itemHomeBottomSearch){
             getSupportFragmentManager().beginTransaction().replace(R.id.BottomMenuHomeFrame,searchFragment).commit();
+        } else if (menuItem.getItemId()==R.id.itemHomeBottomNew) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.BottomMenuHomeFrame,newFragment).commit();
         } else if (menuItem.getItemId()==R.id.itemHomeBottomRegistration){
             getSupportFragmentManager().beginTransaction().replace(R.id.BottomMenuHomeFrame,registrationFragment).commit();
         } else if (menuItem.getItemId()==R.id.itemHomeBottomProfile) {
