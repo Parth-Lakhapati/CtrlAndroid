@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox cbShowPassword;
     TextView tvForgetPassword,tvToRegistration;
     Button btnLogin;
+    AppCompatButton acbtnGoogle;
     ProgressDialog progressDialog;
     SharedPreferences preferences ;
     SharedPreferences.Editor editor;
@@ -43,16 +45,22 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        etUsername = findViewById(R.id.etLoginUsername);
-//        etPassword = findViewById(R.id.etLoginPassword);
-//        cbShowPassword = findViewById(R.id.cbShowPassword);
-//        tvForgetPassword = findViewById(R.id.tvLoginForgetPassword);
-//        tvToRegistration = findViewById(R.id.tvLoginToRegistration);
-//        btnLogin = findViewById(R.id.btnLogin);
+        etUsername = findViewById(R.id.etLoginUsername);
+        etPassword = findViewById(R.id.etLoginPassword);
+        cbShowPassword = findViewById(R.id.cbShowPassword);
+        tvForgetPassword = findViewById(R.id.tvLoginForgetPassword);
+        tvToRegistration = findViewById(R.id.tvLoginRegisterNewUser);
+        btnLogin = findViewById(R.id.btnLogin);
+        acbtnGoogle = findViewById(R.id.acbtnGoogleLogin);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
+        if(preferences.getBoolean("isLogin",false)){
+            Intent i= new Intent(LoginActivity.this,HomeActivity.class);
+            startActivity(i);
+            finish();
+        }
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +106,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        acbtnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     private void loginUser() {
@@ -107,20 +122,20 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if(double_tap){
-//            finishAffinity();
-//        }else{
-//            Toast.makeText(LoginActivity.this,"Exit",Toast.LENGTH_SHORT).show();
-//            double_tap =true;
-//            Handler h=new Handler();
-//            h.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    double_tap =false;
-//                }
-//            },2000);
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        if(double_tap){
+            finishAffinity();
+        }else{
+            Toast.makeText(LoginActivity.this,"Exit",Toast.LENGTH_SHORT).show();
+            double_tap =true;
+            Handler h=new Handler();
+            h.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    double_tap =false;
+                }
+            },2000);
+        }
+    }
 }
