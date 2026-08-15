@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -43,7 +42,6 @@
         android:textSize="16sp"
         android:fontFamily="@font/inter_semibold"
         android:gravity="center" />
-
 
     <!-- Bottom Loading Text -->
     <TextView
