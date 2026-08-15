@@ -1,26 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
 
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".splash_activity">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/gradient_background1"
+    android:padding="24dp"
+    tools:context=".SplashActivity">
 
+
+        <ImageView
+            android:id="@+id/ivSplashLogo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/logo"
+            android:scaleType="centerInside"
+            android:padding="25dp"
+            android:contentDescription="HealthConnect Logo" />
+
+    <!-- App Name -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_marginTop="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="28dp"
+        android:text="HealthConnect"
+        android:textColor="#FAFAF5"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_extrabold" />
 
 
+    <!-- Tagline -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Healthcare Within Your Reach"
+        android:textColor="#D1FAE5"
+        android:textSize="16sp"
+        android:fontFamily="@font/inter_semibold"
+        android:gravity="center" />
 
+
+    <!-- Bottom Loading Text -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="Connecting you to better health..."
+        android:textColor="#A7F3D0"
+        android:textSize="13sp" />
 
 </LinearLayout>
