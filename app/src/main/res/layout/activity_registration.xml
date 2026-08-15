@@ -316,16 +316,20 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="25dp"
-            android:layout_height="20dp"
-            android:id="@+id/acbtnLoginGoogle"
-            android:text="Sign in with Google"
-            android:layout_marginLeft="160dp"
-            android:textColor="@color/neutral"
-            android:textSize="16sp"
-            android:drawableLeft="@drawable/google"
-
-            android:layout_margin="16dp"/>
+            android:id="@+id/acbtnGoogleRegistration"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/google"
+            android:drawablePadding="12dp"
+            android:gravity="center"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:text="Continue with Google"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="160dp"/>
 
     </LinearLayout>
 
