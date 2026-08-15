@@ -102,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                     etPassword.setError("Please enter Your Username");
                 }else {
                     editor.putString("username",etUsername.getText().toString());
+
                     editor.apply();
                     progressDialog = new ProgressDialog(LoginActivity.this);
                     progressDialog.setTitle("Login...");
@@ -227,6 +228,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == 1234){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            editor.putString("name","");
+            editor.putString("email","");
+            editor.apply();
             try {
                 task.getResult(ApiException.class);
                 navigateToHomeActivity();

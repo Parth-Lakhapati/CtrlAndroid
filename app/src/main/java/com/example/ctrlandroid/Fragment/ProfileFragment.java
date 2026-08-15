@@ -133,6 +133,8 @@ public class ProfileFragment extends Fragment {
         progressDialog.setCanceledOnTouchOutside(true);
         progressDialog.show();
 
+        etName.setText(preferences.getString("name",""));
+        etEmail.setText(preferences.getString("email",""));
         getMyDetail();
     }
 
