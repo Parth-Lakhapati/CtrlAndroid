@@ -100,7 +100,8 @@ public class LoginActivity extends AppCompatActivity {
                 }else if(etPassword.getText().toString().isEmpty()){
                     etPassword.setError("Please enter Your Username");
                 }else {
-
+                    editor.putString("username",etUsername.getText().toString());
+                    editor.apply();
                     progressDialog = new ProgressDialog(LoginActivity.this);
                     progressDialog.setTitle("Login...");
                     progressDialog.setMessage("Please wait...");

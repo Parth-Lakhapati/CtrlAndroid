@@ -45,10 +45,13 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
 
     implementation("com.airbnb.android:lottie-compose:6.6.7")
+    implementation("com.karumi:dexter:6.2.3")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.loopj.android:android-async-http:1.4.11")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+
 }

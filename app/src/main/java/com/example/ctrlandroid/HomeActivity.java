@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         btmMenuHomeFrame=findViewById(R.id.BottomMenuHomeFrame);
         btmMenuHome=findViewById(R.id.HomeBottomMenuHome);
         btmMenuHome.setOnNavigationItemSelectedListener(this);
-        btmMenuHome.setSelectedItemId(R.id.BottomMenuHomeFrame);
+        btmMenuHome.setSelectedItemId(R.id.itemHomeBottomHome);
 
     }
 
