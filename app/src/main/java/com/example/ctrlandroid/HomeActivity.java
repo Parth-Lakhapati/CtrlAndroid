@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_home);
 
         preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        editor = preferences.edit();
 
         btmMenuHomeFrame = findViewById(R.id.BottomMenuHomeFrame);
         btmMenuHome = findViewById(R.id.HomeBottomMenuHome);

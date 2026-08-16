@@ -26,7 +26,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.ctrlandroid.URLS.Urls;
+import com.example.ctrlandroid.comman.Urls;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -78,11 +78,11 @@ public class LoginActivity extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
-        if(preferences.getBoolean("isLogin",false)){
-            Intent i= new Intent(LoginActivity.this,HomeActivity.class);
-            startActivity(i);
-            finish();
-        }
+//        if(preferences.getBoolean("isLogin",false)){
+//            Intent i= new Intent(LoginActivity.this,HomeActivity.class);
+//            startActivity(i);
+//            finish();
+//        }
 
         tvToRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                     progressDialog.setTitle("Login...");
                     progressDialog.setMessage("Please wait...");
                     progressDialog.setCanceledOnTouchOutside(true);
+                    progressDialog.setCancelable(false);
                     progressDialog.show();
 
                     loginUser();
@@ -156,55 +157,57 @@ public class LoginActivity extends AppCompatActivity {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
 
-        params.put("user_name",etUsername.getText().toString());
+        params.put("username",etUsername.getText().toString());
         params.put("password",etPassword.getText().toString());
 
-        client.post(Urls.loginUserAPI,params,new JsonHttpResponseHandler()
-                {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        super.onSuccess(statusCode, headers, response);
+        client.post(Urls.loginUserAPI,params,new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
 
-                        progressDialog.dismiss();
+                if (progressDialog != null && progressDialog.isShowing()) {
+                    progressDialog.dismiss();
 
-                        try {
-                            String status = response.getString("success");
-                            String msg = response.getString("message");
+                    try {
+                        String status = response.getString("success");
+                        String msg = response.getString("message");
 
-                            if(status.equals("1")){
-                                editor.putBoolean("isLogin",true);
-                                editor.apply();
+                        if (status.equals("1")) {
+                            editor.putBoolean("isLogin", true);
+                            editor.apply();
 
-                                Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
 
-                                Handler h=new Handler();
-                                h.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
+                            Handler h = new Handler();
+                            h.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
 
-                                        Intent i=new Intent(LoginActivity.this, WelcomeActivity.class);
-                                        startActivity(i);
-                                        finish();
-                                    }
-                                },1000);
-                            }else{
-                                Toast.makeText(LoginActivity.this, " "+msg, Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
+                                    Intent i = new Intent(LoginActivity.this, WelcomeActivity.class);
+                                    startActivity(i);
+                                    finish();
+                                }
+                            }, 1000);
+                        } else {
+                            Toast.makeText(LoginActivity.this, " " + msg, Toast.LENGTH_SHORT).show();
                         }
-
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                        super.onFailure(statusCode, headers, throwable, errorResponse);
-                        progressDialog.dismiss();
-                        Toast.makeText(LoginActivity.this, "Server Error ", Toast.LENGTH_SHORT).show();
-
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
                 }
-        );
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                if (progressDialog != null && progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                    Toast.makeText(LoginActivity.this, "Server Error ", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
     }
     @Override
     public void onBackPressed() {

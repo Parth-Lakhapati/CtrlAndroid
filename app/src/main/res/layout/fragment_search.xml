@@ -21,12 +21,11 @@
             android:layout_height="50dp"
             android:queryHint="Enter Your Destination, Price"
             android:iconifiedByDefault="false"
+            android:layout_margin="8dp"
             android:background="#3E8E32"/>
 
     </androidx.cardview.widget.CardView>
 
-
-    <!-- THREE CARDS -->
 
     <ScrollView
         android:layout_width="match_parent"

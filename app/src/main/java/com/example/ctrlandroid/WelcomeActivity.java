@@ -34,7 +34,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         "Started Successfully",
                         Toast.LENGTH_SHORT
                 ).show();
-                Intent i = new Intent(WelcomeActivity.this, LoginActivity.class);
+                Intent i = new Intent(WelcomeActivity.this, HomeActivity.class);
                 startActivity(i);
             }
         });

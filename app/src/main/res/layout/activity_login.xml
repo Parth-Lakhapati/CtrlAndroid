@@ -200,7 +200,7 @@
                 android:gravity="center_vertical"
                 android:padding="12dp">
 
-                <!-- Google Icon Button -->
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/acbtnGoogleLogin"
                     android:layout_width="40dp"
@@ -209,7 +209,6 @@
                     android:layout_marginEnd="12dp"
                     android:gravity="center"/>
 
-                <!-- Text beside the icon -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
