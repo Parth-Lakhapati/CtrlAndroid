@@ -1,14 +1,373 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.SearchFragment">
+    android:orientation="vertical"
+    android:background="#FAF9FC">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="50dp"
+       android:layout_marginTop="15dp"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="0dp">
 
-</FrameLayout>
+        <SearchView
+            android:id="@+id/svDiscoverSearchDestinations"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:queryHint="Enter Your Destination, Price"
+            android:iconifiedByDefault="false"
+            android:background="#3E8E32"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- THREE CARDS -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="18dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- CARD 1 -->
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="18dp"
+
+                app:cardCornerRadius="18dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp">
+
+                        <ImageView
+                            android:id="@+id/campImage1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/camp1"/>
+
+                        <TextView
+                            android:id="@+id/ratingText1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="10dp"
+                            android:text="★ 4.8/5"
+                            android:textColor="#333333"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:background="@drawable/gradient_background1"/>
+
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/campTitle1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Free Dental Checkup"
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/seatsText1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12 Seats"
+                                android:textColor="@color/white"
+                                android:textSize="11sp"
+                                android:textStyle="bold"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/hospitalText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:text="⊞  City Care Hospital"
+                            android:textColor="@color/neutral"
+                            android:textSize="14sp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/dateText1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="▣  Oct 24, 2023"
+                                android:textColor="@color/neutral"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:id="@+id/timeText1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="◷  09:00 AM"
+                                android:textColor="@color/neutral"
+                                android:textSize="14sp"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/distanceText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="⌖ Amravati"
+                            android:textColor="@color/neutral"
+                            android:textSize="14sp"/>
+
+                        <Button
+                            android:id="@+id/btnSearchLogin"
+                            android:layout_width="300dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:backgroundTint="#3E8E32"
+                            android:elevation="8dp"
+                            android:text="Register"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <!-- CARD 2 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="18dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:id="@+id/campImage2"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/camp3"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:id="@+id/campTitle2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Vision Screening Camp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/hospitalText2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:text="⊞  Optima Vision Center"
+                            android:textColor="@color/neutral"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/dateText2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="▣  Oct 26, 2023     ◷  10:30 AM"
+                            android:textColor="@color/neutral"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/distanceText2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="⌖ Amravati"
+                            android:textColor="@color/neutral"
+                            android:textSize="14sp"/>
+
+                        <Button
+                            android:id="@+id/btnSearchCard2"
+                            android:layout_width="300dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:backgroundTint="#3E8E32"
+                            android:elevation="8dp"
+                            android:text="Register"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- CARD 3 -->
+
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="18dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:id="@+id/campImage3"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/camp4"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:id="@+id/campTitle3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Women's Wellness Drive"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/hospitalText3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:text="⊞  Grace Medical"
+                            android:textColor="@color/neutral"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/dateText3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="▣  Nov 02, 2023     ◷  08:00 AM"
+                            android:textColor="@color/neutral"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/distanceText3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="⌖ Amravati"
+                            android:textColor="@color/neutral"
+                            android:textSize="14sp"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            app:cardCornerRadius="30dp"
+                            app:cardElevation="4dp">
+                            <Button
+                                android:id="@+id/btnLogin"
+                                android:layout_width="300dp"
+                                android:layout_height="55dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="15dp"
+                                android:backgroundTint="#3E8E32"
+                                android:elevation="8dp"
+                                android:text="Register"
+                                android:textColor="#FFFFFF"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <!-- YOUR EXISTING BOTTOM NAVIGATION CAN STAY HERE -->
+
+</LinearLayout>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,6 +10,7 @@
     android:padding="24dp"
     tools:context=".SplashActivity">
 
+
         <ImageView
             android:id="@+id/ivSplashLogo"
             android:layout_width="match_parent"
@@ -20,6 +20,7 @@
             android:padding="25dp"
             android:contentDescription="HealthConnect Logo" />
 
+    <!-- App Name -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,7 +32,7 @@
         android:fontFamily="@font/poppins_extrabold" />
 
 
-
+    <!-- Tagline -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +43,7 @@
         android:fontFamily="@font/inter_semibold"
         android:gravity="center" />
 
-
+    <!-- Bottom Loading Text -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

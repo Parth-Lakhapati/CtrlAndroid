@@ -26,7 +26,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.ctrlandroid.comman.Urls;
+import com.example.ctrlandroid.URLS.Urls;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -45,13 +45,14 @@ import cz.msebera.android.httpclient.Header;
 public class LoginActivity extends AppCompatActivity {
 
     boolean double_tap = false;
-    EditText etUsername, etPassword;
+    EditText etUsername,etPassword;
     CheckBox cbShowPassword;
-    TextView tvForgetPassword, tvToRegistration;
+    TextView tvForgetPassword,
+            tvToRegistration;
     Button btnLogin;
     AppCompatButton acbtnGoogle;
     ProgressDialog progressDialog;
-    SharedPreferences preferences;
+    SharedPreferences preferences ;
     SharedPreferences.Editor editor;
 
     GoogleSignInOptions googleSignInOptions;
@@ -72,15 +73,16 @@ public class LoginActivity extends AppCompatActivity {
         acbtnGoogle = findViewById(R.id.acbtnGoogleLogin);
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+        googleSignInClient = GoogleSignIn.getClient(this,googleSignInOptions);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
-//        if(preferences.getBoolean("isLogin",false)){
-//            Intent i= new Intent(LoginActivity.this,HomeActivity.class);
-//            startActivity(i);
-//            finish();
+        if(preferences.getBoolean("isLogin",false)){
+            Intent i= new Intent(LoginActivity.this,HomeActivity.class);
+            startActivity(i);
+            finish();
+        }
 
         tvToRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +144,7 @@ public class LoginActivity extends AppCompatActivity {
               signIn();
             }
         });
+
     }
 
     private void signIn() {
@@ -149,55 +152,60 @@ public class LoginActivity extends AppCompatActivity {
         startActivityForResult(signInIntent,1234);
     }
 
-    private void loginUser()
-    {
+    private void loginUser() {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
 
-        params.put("username",etUsername.getText().toString());
+        params.put("user_name",etUsername.getText().toString());
         params.put("password",etPassword.getText().toString());
 
         client.post(Urls.loginUserAPI,params,new JsonHttpResponseHandler()
-        {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
+                {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        super.onSuccess(statusCode, headers, response);
 
-                try {
-                    if(progressDialog != null && progressDialog.isShowing()) {
                         progressDialog.dismiss();
+
+                        try {
+                            String status = response.getString("success");
+                            String msg = response.getString("message");
+
+                            if(status.equals("1")){
+                                editor.putBoolean("isLogin",true);
+                                editor.apply();
+
+                                Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                                Handler h=new Handler();
+                                h.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        Intent i=new Intent(LoginActivity.this, WelcomeActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                },1000);
+                            }else{
+                                Toast.makeText(LoginActivity.this, " "+msg, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+
                     }
-                    String status = response.getString("success");
-                    String message = response.getString("message");
 
-                    if (status.equals("1")) {
-//                        editor.putBoolean("isLogin",true);
-                        editor.putString("username", etUsername.getText().toString().trim());
-                        editor.apply();
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        super.onFailure(statusCode, headers, throwable, errorResponse);
+                        progressDialog.dismiss();
+                        Toast.makeText(LoginActivity.this, "Server Error ", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(LoginActivity.this, "Login Successfully Done", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(LoginActivity.this, ""+ message, Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
                 }
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-
-                if(progressDialog != null && progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                }
-                Toast.makeText(LoginActivity.this,"Server Error",Toast.LENGTH_SHORT).show();
-            }
-        });
+        );
     }
-
     @Override
     public void onBackPressed() {
         if(double_tap){
@@ -218,19 +226,26 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == 1234){
+
+        if (requestCode == 1234) {   // <-- check requestCode, not resultCode
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            editor.putString("name","");
-            editor.putString("email","");
-            editor.apply();
             try {
-                task.getResult(ApiException.class);
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+
+                // Save user info
+                editor.putString("name", account.getDisplayName());
+                editor.putString("email", account.getEmail());
+                editor.apply();
+
+                Toast.makeText(LoginActivity.this, "Welcome " + account.getDisplayName(), Toast.LENGTH_SHORT).show();
+
                 navigateToHomeActivity();
             } catch (ApiException e) {
-                Toast.makeText(LoginActivity.this, ""+e, Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Google Sign-In failed: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();
             }
         }
     }
+
 
     private void navigateToHomeActivity() {
         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);

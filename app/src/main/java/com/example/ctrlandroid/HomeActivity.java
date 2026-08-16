@@ -32,8 +32,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    GoogleSignInOptions googleSignInOptions;
-    GoogleSignInClient googleSignInClient;
     FrameLayout btmMenuHomeFrame;
     BottomNavigationView btmMenuHome;
     @Override
@@ -41,28 +39,36 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        btmMenuHomeFrame=findViewById(R.id.BottomMenuHomeFrame);
-        btmMenuHome=findViewById(R.id.HomeBottomMenuHome);
+        preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+
+        btmMenuHomeFrame = findViewById(R.id.BottomMenuHomeFrame);
+        btmMenuHome = findViewById(R.id.HomeBottomMenuHome);
         btmMenuHome.setOnNavigationItemSelectedListener(this);
-        btmMenuHome.setSelectedItemId(R.id.itemHomeBottomHome);
+        btmMenuHome.setSelectedItemId(R.id.BottomMenuHomeFrame);
 
-        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        googleSignInClient = GoogleSignIn.getClient(this,googleSignInOptions);
+        boolean isFirstTime = preferences.getBoolean("isFirstTime", true);
 
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account!=null){
-            String name = account.getDisplayName();
-            String email = account.getEmail();
-
-            editor.putString("name",name);
-            editor.putString("email",email);
-            editor.apply();
+        if (isFirstTime) {
+            welcome();
         }
+    }
 
+    private void welcome() {
+        AlertDialog.Builder ad=new AlertDialog.Builder(HomeActivity.this);
+        ad.setTitle("WELCOME....");
+        ad.setMessage("Thank you for login in our app DSY College Finder");
+        ad.setPositiveButton("Thank you..", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }).show().create();
+        editor.putBoolean("isFirstTime",false).commit();
     }
 
     HomeFragment homeFragment = new HomeFragment();
     SearchFragment searchFragment = new SearchFragment();
+    NewFragment newFragment = new NewFragment();
     RegistrationFragment registrationFragment = new RegistrationFragment();
     ProfileFragment profileFragment = new ProfileFragment();
 
@@ -73,12 +79,12 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             getSupportFragmentManager().beginTransaction().replace(R.id.BottomMenuHomeFrame,homeFragment).commit();
         }else if(menuItem.getItemId()==R.id.itemHomeBottomSearch){
             getSupportFragmentManager().beginTransaction().replace(R.id.BottomMenuHomeFrame,searchFragment).commit();
+
         } else if (menuItem.getItemId()==R.id.itemHomeBottomRegistration){
             getSupportFragmentManager().beginTransaction().replace(R.id.BottomMenuHomeFrame,registrationFragment).commit();
         } else if (menuItem.getItemId()==R.id.itemHomeBottomProfile) {
             getSupportFragmentManager().beginTransaction().replace(R.id.BottomMenuHomeFrame,profileFragment).commit();
         }
-
         return true;
     }
 }

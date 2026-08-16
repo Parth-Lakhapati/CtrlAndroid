@@ -29,8 +29,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_extrabold"
                 android:text="Create Account"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/gradient_background1"
+                android:textColor="#3E8E32"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
