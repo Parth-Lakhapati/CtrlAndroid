@@ -15,7 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.ctrlandroid.URLS.Urls;
+import com.example.ctrlandroid.comman.Urls;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -66,16 +66,14 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
-
     private void forgetPassword() {
 
         AsyncHttpClient client= new AsyncHttpClient();
         RequestParams params =new RequestParams();
 
-        params.put("user_name",etUsername.getText().toString());
-        params.put("password",etPassword.getText().toString());
+        params.put("username",etUsername.getText().toString());
+        params.put("newpassword",etPassword.getText().toString());
 
         client.post(Urls.forgetPasswordAPI,params,new JsonHttpResponseHandler(){
 
@@ -84,7 +82,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 super.onSuccess(statusCode, headers, response);
 
                 progressDialog.dismiss();
-
                 try {
                     String status =response.getString("success");
                     String msg = response.getString("message");
@@ -108,7 +105,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);

@@ -45,14 +45,14 @@ import cz.msebera.android.httpclient.Header;
 public class LoginActivity extends AppCompatActivity {
 
     boolean double_tap = false;
-    EditText etUsername,etPassword;
+    EditText etUsername, etPassword;
     CheckBox cbShowPassword;
     TextView tvForgetPassword,
             tvToRegistration;
     Button btnLogin;
     AppCompatButton acbtnGoogle;
     ProgressDialog progressDialog;
-    SharedPreferences preferences ;
+    SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
     GoogleSignInOptions googleSignInOptions;
@@ -73,16 +73,15 @@ public class LoginActivity extends AppCompatActivity {
         acbtnGoogle = findViewById(R.id.acbtnGoogleLogin);
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        googleSignInClient = GoogleSignIn.getClient(this,googleSignInOptions);
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
-        if(preferences.getBoolean("isLogin",false)){
-            Intent i= new Intent(LoginActivity.this,HomeActivity.class);
-            startActivity(i);
-            finish();
-        }
+//        if(preferences.getBoolean("isLogin",false)){
+//            Intent i= new Intent(LoginActivity.this,HomeActivity.class);
+//            startActivity(i);
+//            finish();
 
         tvToRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,9 +170,8 @@ public class LoginActivity extends AppCompatActivity {
                     String message = response.getString("message");
 
                     if (status.equals("1")) {
-                        editor.putBoolean("isLogin",true);
-                        editor.putString("username",
-                                etUsername.getText().toString().trim());
+//                        editor.putBoolean("isLogin",true);
+                        editor.putString("username", etUsername.getText().toString().trim());
                         editor.apply();
 
                         Toast.makeText(LoginActivity.this, "Login Successfully Done", Toast.LENGTH_SHORT).show();
