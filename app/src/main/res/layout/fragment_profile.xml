@@ -19,7 +19,6 @@
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
-            <!-- Header Card -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,7 +43,6 @@
                         android:textColor="#1E293B"
                         android:layout_marginBottom="12dp"/>
 
-                    <!-- Profile Image -->
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profileImage"
                         android:layout_width="120dp"
@@ -64,7 +62,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Info Section -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,6 +83,8 @@
                         android:hint="Full Name"
                         android:inputType="textPersonName"
                         android:padding="12dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         android:background="@drawable/edittext_background"
                         android:layout_marginBottom="12dp"/>
 
@@ -96,6 +95,8 @@
                         android:hint="Email Address"
                         android:inputType="textEmailAddress"
                         android:padding="12dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         android:background="@drawable/edittext_background"
                         android:layout_marginBottom="12dp"/>
 
@@ -106,6 +107,8 @@
                         android:hint="Mobile Number"
                         android:inputType="phone"
                         android:padding="12dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         android:background="@drawable/edittext_background"
                         android:layout_marginBottom="12dp"/>
 
@@ -116,6 +119,8 @@
                         android:hint="UserName"
                         android:inputType="text"
                         android:padding="12dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         android:background="@drawable/edittext_background"
                         android:layout_marginBottom="12dp"/>
 
@@ -126,6 +131,8 @@
                         android:hint="Age"
                         android:inputType="text"
                         android:padding="12dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         android:background="@drawable/edittext_background"
                         android:layout_marginBottom="12dp"/>
 
@@ -141,13 +148,16 @@
                             android:id="@+id/rbMale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Male"/>
+                            android:text="Male"
+                            android:textColor="@color/black"/>
 
                         <RadioButton
                             android:id="@+id/rbFemale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Female"
+                            android:textColor="@color/black"
+                            android:buttonTint="@color/black"
                             android:layout_marginStart="24dp"/>
 
                         <RadioButton
@@ -155,12 +165,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Other"
+                            android:textColor="@color/black"
+                            android:buttonTint="@color/black"
                             android:layout_marginStart="24dp"/>
                     </RadioGroup>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Save Button -->
             <Button
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
