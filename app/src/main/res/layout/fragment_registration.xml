@@ -13,7 +13,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Title -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,6 +97,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Camp Name"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
                     android:background="@drawable/edittext_background"
                     android:inputType="textPersonName"
                     android:layout_marginBottom="8dp" />
@@ -107,6 +108,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Description"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
                     android:background="@drawable/edittext_background"
                     android:inputType="textMultiLine"
                     android:minLines="3"
@@ -118,6 +121,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Schedule"
                     android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
                     android:background="@drawable/edittext_background"
                     android:layout_marginBottom="8dp" />
 
@@ -127,6 +132,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Date"
                     android:inputType="date"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
                     android:background="@drawable/edittext_background"
                     android:layout_marginBottom="8dp" />
 
@@ -135,7 +142,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Capacity of People"
-                    android:inputType="number"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
                     android:background="@drawable/edittext_background"
                     android:layout_marginBottom="16dp" />
 
@@ -145,7 +154,7 @@
                     android:layout_height="wrap_content"
                     android:text="Create Camp"
                     android:backgroundTint="#009688"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/black"
                     android:background="@drawable/edittext_background"
                     android:textStyle="bold" />
             </LinearLayout>

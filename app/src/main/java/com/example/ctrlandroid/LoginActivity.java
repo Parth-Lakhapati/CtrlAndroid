@@ -47,8 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     boolean double_tap = false;
     EditText etUsername, etPassword;
     CheckBox cbShowPassword;
-    TextView tvForgetPassword,
-            tvToRegistration;
+    TextView tvForgetPassword, tvToRegistration;
     Button btnLogin;
     AppCompatButton acbtnGoogle;
     ProgressDialog progressDialog;
