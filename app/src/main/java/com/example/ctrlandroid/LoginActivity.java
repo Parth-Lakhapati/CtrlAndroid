@@ -101,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     etPassword.setError("Please enter Your Username");
                 }else {
                     editor.putString("username",etUsername.getText().toString());
+
                     editor.apply();
                     progressDialog = new ProgressDialog(LoginActivity.this);
                     progressDialog.setTitle("Login...");
@@ -127,11 +128,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    etPassword.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.plus_icon,0);
+                    etPassword.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.eyecolor_img,0);
 
                 }else{
                     etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    etPassword.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.eye_closed,0);
+                    etPassword.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.eye_close_icon,0);
                 }
             }
         });
@@ -220,6 +221,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == 1234){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            editor.putString("name","");
+            editor.putString("email","");
+            editor.apply();
             try {
                 task.getResult(ApiException.class);
                 navigateToHomeActivity();

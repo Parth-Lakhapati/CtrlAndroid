@@ -2,28 +2,34 @@ package com.example.ctrlandroid.Fragment;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import com.example.ctrlandroid.LoginActivity;
 import com.example.ctrlandroid.R;
-import com.example.ctrlandroid.comman.Urls;
+import com.example.ctrlandroid.URLS.Urls;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -35,30 +41,22 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+
 public class ProfileFragment extends Fragment {
 
     CircleImageView civMyProfile;
 
-    EditText etName, etMobileNo, etEmail, etUsername, etAge;
-
+    EditText etName,etMobileNo,etEmail,etUsername,etAge;
     RadioGroup rgGender;
-
     Button btnLogout;
-
-    int IMAGE_REQUIRED = 1;
-
+    int IMAGE_REQUIRED=1;
     ProgressDialog progressDialog;
-
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-
-
     @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View view = inflater.inflate(    R.layout.fragment_profile,    container,
-                false
-        );
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         civMyProfile = view.findViewById(R.id.profileImage);
         etName = view.findViewById(R.id.etProfileName);
@@ -66,174 +64,161 @@ public class ProfileFragment extends Fragment {
         etEmail = view.findViewById(R.id.etProfileEmail);
         etUsername = view.findViewById(R.id.etProfileUsername);
         etAge = view.findViewById(R.id.etProfileAge);
+
         rgGender = view.findViewById(R.id.rgGender);
+
         btnLogout = view.findViewById(R.id.btnLogout);
 
+        int selectedId = rgGender.getCheckedRadioButtonId();
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(requireActivity());
+        if (selectedId != -1) {
+            RadioButton rbGender = view.findViewById(selectedId);
+            String gender = rbGender.getText().toString();
+
+            Toast.makeText(getActivity(), gender, Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getActivity(),"sorry gender can not ",Toast.LENGTH_SHORT).show();
+        }
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         editor = preferences.edit();
-
 
         civMyProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent();
+                Intent intent=new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(  Intent.createChooser( intent,"Select Image"  ),  IMAGE_REQUIRED
-                );
+
+                startActivityForResult(Intent.createChooser(intent,"select image"),IMAGE_REQUIRED);
             }
         });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                AlertDialog.Builder alertDialog =      new AlertDialog.Builder(requireActivity());
+                AlertDialog.Builder alertDialog =new AlertDialog.Builder(getActivity());
                 alertDialog.setTitle("Logout the Account");
-                alertDialog.setMessage(  "Do you really want to Logout your account" );
-                alertDialog.setPositiveButton(
-                        "Cancel",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        }
-                );
-
+                alertDialog.setMessage("Do you really want to Logout your account");
+                alertDialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
                 alertDialog.setNegativeButton("Logout", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(  DialogInterface dialog,  int which) {
-                                editor.putBoolean( "isLogin", false);
-                                editor.remove("username");
-                                editor.apply();
-                                Intent intent = new Intent(requireActivity(),LoginActivity.class);
-                                startActivity(intent);
-                                requireActivity().finish();
-                            }
-                        }
-                );
-                alertDialog.show();
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        editor.putBoolean("isLogin", false);
+                        editor.apply();
+
+                        Intent i = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(i);
+                    }
+                }).show().create();
+
             }
         });
+
         return view;
     }
-
-
     @Override
     public void onStart() {
         super.onStart();
-        progressDialog = new ProgressDialog( requireActivity());
+
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("My Profile");
         progressDialog.setMessage("Please Wait");
-        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCanceledOnTouchOutside(true);
         progressDialog.show();
+
+        etName.setText(preferences.getString("name",""));
+        etEmail.setText(preferences.getString("email",""));
         getMyDetail();
     }
 
     private void getMyDetail() {
-        AsyncHttpClient client =new AsyncHttpClient();
+        AsyncHttpClient client= new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        String username =  preferences.getString( "username","");
 
-        if (username.isEmpty()) {
-            if (progressDialog != null &&   progressDialog.isShowing()) {
-                progressDialog.dismiss();
-            }
+        String username = preferences.getString("username","");
 
-            Toast.makeText(  requireActivity(),  "Username Not Found",  Toast.LENGTH_LONG
-            ).show();
+        if(username.isEmpty()){
+            Toast.makeText(getActivity(), "Username Not Found",Toast.LENGTH_LONG).show();
             return;
         }
-        params.put(   "username",  username
-        );
+
+        params.put("user_name", username);
+
+        client.post(Urls.getMyDetailAPI,params,new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+
+                Toast.makeText(getActivity(), "Profile Update", Toast.LENGTH_SHORT).show();
 
 
-        client.post(  Urls.getMyDetailAPI,  params,    new JsonHttpResponseHandler() {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("getMyDetails");
 
-                    @Override
-                    public void onSuccess( int statusCode, Header[] headers, JSONObject response) {
-                        super.onSuccess(  statusCode,  headers,  response);
-
-
-                        try {
-
-                            JSONArray jsonArray = response.getJSONArray(   "getMyDetails");
-
-                            if (jsonArray.length() == 0) {
-                                if (progressDialog != null && progressDialog.isShowing()) {
-                                    progressDialog.dismiss();
-                                }
-                                Toast.makeText( requireActivity(), "User Not Found", Toast.LENGTH_LONG).show();
-                                return;
-                            }
-
-                            JSONObject jsonObject = jsonArray.getJSONObject(0);
-                            String name = jsonObject.getString("name");
-                            String mobileNo = jsonObject.getString( "mobileno");
-                            String emailId =jsonObject.getString("emailid");
-                            String userName = jsonObject.getString("username");
-                            String age =jsonObject.getString("age");
-                            String gender =jsonObject.getString("gender");
-
-
-                            etName.setText(name);
-                            etMobileNo.setText(mobileNo);
-                            etEmail.setText(emailId);
-                            etUsername.setText(userName);
-                            etAge.setText(age);
-
-
-                            if (gender.equalsIgnoreCase("Male")) {
-                                rgGender.check(   R.id.rbMale);
-
-                            } else if (gender.equalsIgnoreCase("Female")) {
-                                rgGender.check(R.id.rbFemale);
-
-                            } else {
-                                rgGender.check(R.id.rbOther
-                                );
-                            }
-
-                            if (progressDialog != null && progressDialog.isShowing()) {
-                                progressDialog.dismiss();
-                            }
-
-                        } catch (JSONException e) {
-
-                            if (progressDialog != null && progressDialog.isShowing()) {
-                                progressDialog.dismiss();
-                            }
-                            Toast.makeText(requireActivity(), "Data Error", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
+                    if(jsonArray.length()==0){
+                        progressDialog.dismiss();
+                        Toast.makeText(getActivity(),"User Not Found",Toast.LENGTH_LONG).show();
+                        return;
                     }
 
+                    for(int i=0;i <jsonArray.length();i++){
+                        JSONObject jsonObject=jsonArray.getJSONObject(i);
 
-                    @Override
-                    public void onFailure( int statusCode,Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                        super.onFailure(statusCode, headers, throwable, errorResponse);
-                        if (progressDialog != null && progressDialog.isShowing()) {
-                            progressDialog.dismiss();
+                        String id = jsonObject.getString("id");
+                        String strname = jsonObject.getString("name");
+                        String strmobileNo = jsonObject.getString("mobile_no");
+                        String stremailId = jsonObject.getString("email");
+                        String struserName = jsonObject.getString("user_name");
+                        String strage = jsonObject.getString("age");
+
+                        String gender = jsonObject.getString("gender");
+
+                        if (gender.equalsIgnoreCase("Male")) {
+                            rgGender.check(R.id.rbMale);
+                        } else if (gender.equalsIgnoreCase("Female")) {
+                            rgGender.check(R.id.rbFemale);
+                        } else {
+                            rgGender.check(R.id.rbOther);
                         }
+                        etName.setText(strname);
+                        etMobileNo.setText(strmobileNo);
+                        etEmail.setText(stremailId);
+                        etUsername.setText(struserName);
+                        etAge.setText(strage);
 
-                        Toast.makeText(requireActivity(), "Server Error", Toast.LENGTH_SHORT).show();
-                        throwable.printStackTrace();
+                        progressDialog.dismiss();
                     }
+                } catch (JSONException e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(), "Data Error",Toast.LENGTH_SHORT).show();
+                    throw new RuntimeException(e);
                 }
-        );
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(), "Server Error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
-    public void onActivityResult(   int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == IMAGE_REQUIRED && resultCode == RESULT_OK && data != null) {
-            Uri uri = data.getData();
-            if (uri != null) {
-                civMyProfile.setImageURI(uri);
-            }
+        if(requestCode==IMAGE_REQUIRED && resultCode==RESULT_OK && data != null){
+            Uri uri=data.getData();
+
+            civMyProfile.setImageURI(uri);
         }
     }
 }
